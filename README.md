@@ -1,3 +1,55 @@
+# ChatGPT Retrieval Plugin + Frontend
+
+## Quickstart
+
+1. Clone the repo:
+    ```
+    git@github.com:nwmahoney/chatgpt-retrieval-plugin.git
+    ```
+2. Run the backend:
+    ```
+    docker compose up -d
+    ```
+3. Run the frontend:
+    1. Install the latest `nvm` and install Node v20.0.0:
+        ```
+        brew install nvm
+        nvm install v20.0.0
+        ```
+    2. Enable [Corepack](https://nodejs.org/dist/latest/docs/api/corepack.html):
+        ```
+        corepack enable
+        ```
+    3. Install and configure `direnv`
+        1. Install `direnv`:
+            ```
+            brew install direnv
+            ```
+        2. Configure `direnv` to use `nvm` by adding the following contents to `~/.config/direnv/direnvrc`:
+            ```
+            use_nvm() {
+              local node_version=$1
+
+              nvm_sh=~/.nvm/nvm.sh
+              if [[ -e $nvm_sh ]]; then
+                source $nvm_sh
+                nvm use $node_version
+              fi
+            }
+            ```
+        3. Approve the contents of `frontent/.envrc`:
+            ```
+            cd frontend
+            direnv allow
+            ```
+    4. Run the frontend:
+        ```
+        yarn dev
+        ```
+
+---
+**Original README:**
+
 # ChatGPT Retrieval Plugin
 
 > **Join the [ChatGPT plugins waitlist here](https://openai.com/waitlist/plugins)!**
