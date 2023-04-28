@@ -63,6 +63,9 @@
         ```
         - **TODO:** Why is `yarn install` necessary? Since we have `frontend/.yarn/cache`, i.e. [Zero-Installs](https://yarnpkg.com/features/zero-installs), shouldn't it already have the dependencies after cloning? Is related to creating the frontend app with Vite?
 
+## TODOs
+- Should we just use Docker (Compose?) instead of having all these steps in the [Quickstart section](#quickstart)?
+
 ---
 **Original README:**
 
