@@ -11,12 +11,16 @@
     ```
     docker compose up -d
     ```
+    - **TODO:** Add instructions for installing Docker and creating a `.env` file.
 3. Run the frontend:
     1. Install the latest `nvm` and install Node v20.0.0:
         ```
         brew install nvm
+        mkdir ~/.nvm
+        # TODO: Add instructions to add the nvm lines to ~/.zshrc, and source ~/.zshrc
         nvm install v20.0.0
         ```
+        - **TODO:** Should we just use the [official installation method](https://github.com/nvm-sh/nvm#install--update-script)?
     2. Enable [Corepack](https://nodejs.org/dist/latest/docs/api/corepack.html):
         ```
         corepack enable
@@ -26,7 +30,11 @@
             ```
             brew install direnv
             ```
-        2. Configure `direnv` to use `nvm` by adding the following contents to `~/.config/direnv/direnvrc`:
+        2. Configure `direnv` to use `nvm`:
+            ```
+            mkdir -p ~/.config/direnv
+            ```
+            Copy this function...
             ```
             use_nvm() {
               local node_version=$1
@@ -38,15 +46,22 @@
               fi
             }
             ```
+            ...and paste it to `~/.config/direnv/direnvrc`:
+            ```
+            pbpaste >> ~/.config/direnv/direnvrc
+            ```
         3. Approve the contents of `frontent/.envrc`:
             ```
             cd frontend
             direnv allow
+            node --version # Should be v20.0.0
             ```
     4. Run the frontend:
         ```
+        yarn install
         yarn dev
         ```
+        - **TODO:** Why is `yarn install` necessary? Since we have `frontend/.yarn/cache`, i.e. [Zero-Installs](https://yarnpkg.com/features/zero-installs), shouldn't it already have the dependencies after cloning? Is related to creating the frontend app with Vite?
 
 ---
 **Original README:**
