@@ -4,7 +4,7 @@
 
 1. Clone the repo:
     ```
-    git@github.com:nwmahoney/chatgpt-retrieval-plugin.git
+    git clone git@github.com:nwmahoney/chatgpt-retrieval-plugin.git
     ```
 2. Run the backend:
     ```
