@@ -15,6 +15,7 @@ from models.api import (
 )
 from datastore.factory import get_datastore
 from services.file import get_document_from_file
+from services.openai import get_chat_completion
 
 from models.models import DocumentMetadata, Source
 
@@ -93,10 +94,30 @@ async def query_main(
     request: QueryRequest = Body(...),
 ):
     try:
-        results = await datastore.query(
+        datastore_results = await datastore.query(
             request.queries,
         )
-        return QueryResponse(results=results)
+
+        print(f"datastore_results: { datastore_results }")
+
+        messages = [
+            {
+                "role": "system",
+                "content": f"""
+                You are a helpful assisant that quotes a document word-for-word. This is the document: { datastore_results[0].results[0].text }
+                """,
+            },
+            {
+                "role": "user",
+                "content": "What does the document say?"
+            },
+        ]
+
+        chat_completion = get_chat_completion(messages)
+
+        print(f"chat_completion: { chat_completion }")
+        print("Returning a QueryResponse")
+        return QueryResponse(chat_completion=chat_completion, results=datastore_results)
     except Exception as e:
         print("Error:", e)
         raise HTTPException(status_code=500, detail="Internal Service Error")

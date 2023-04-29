@@ -21,6 +21,7 @@ class QueryRequest(BaseModel):
 
 
 class QueryResponse(BaseModel):
+    chat_completion: str
     results: List[QueryResult]
 
 
